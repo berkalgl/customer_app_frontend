@@ -2,7 +2,7 @@ import { Paper, makeStyles, Toolbar } from '@material-ui/core';
 import React from 'react';
 import Controls from '../../components/controls/Controls';
 import Popup from '../../components/Popup';
-import Table from '../../components/Table';
+import EnhancedTable from '../../components/TableComponent';
 import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles(theme => ({
@@ -19,13 +19,12 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const customerColumns = 
-[
-    { title: 'FullName', field: 'fullName' },
-    { title: 'Email', field: 'email' },
-    { title: 'Mobile Number', field: 'mobileNum', type: 'numeric' },
-    { title: 'Doğum Yeri', field: 'city', lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' } }
-];
+const headCells = [
+    { id: 'fullName', numeric: false, disablePadding: true, label: 'FullName' },
+    { id: 'email', numeric: true, disablePadding: false, label: 'Email' },
+    { id: 'mobileNum', numeric: true, disablePadding: false, label: 'Mobile Number' },
+    { id: 'city', numeric: true, disablePadding: false, label: 'Doğum Yeri' }
+  ];
   
 const customerTableOptions = {
     actionsColumnIndex: -1,
@@ -53,11 +52,10 @@ export default function CustomerList() {
                         onClick={() => { setOpenPopup(true); }}
                     />
                 </Toolbar>
-                <Table
+                <EnhancedTable
                     sourceUrl="http://localhost:4000/api/v1/customers/list"
-                    columns={customerColumns}
-                    title="Customer Page"
-                    options={customerTableOptions}
+                    headCells={headCells}                    
+                    title="Customer Page"                
                 />
             </Paper>
 

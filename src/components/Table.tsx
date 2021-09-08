@@ -54,7 +54,7 @@ export default function Table(props:any) {
       }
       fetchData();
 
-    }, []);
+    }, [sourceUrl]);
 
     return (
       <Fragment>
